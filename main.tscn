@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c1pbytiaekwq6" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://ljmj4p852emh" path="res://tiles/tijolos_32x32.png" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://fvl8my7u4cr6" path="res://npc.tscn" id="3_h2yge"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2yge"]
 texture = ExtResource("2_0xm2m")
@@ -14,9 +15,6 @@ texture = ExtResource("2_0xm2m")
 [sub_resource type="TileSet" id="TileSet_ig7tw"]
 sources/0 = SubResource("TileSetAtlasSource_h2yge")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
-size = Vector2(100, 100)
-
 [node name="Main" type="Node2D" unique_id=2037170575]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2071247049]
@@ -25,40 +23,14 @@ tile_map_data = PackedByteArray("AADa/+r/AAABAAAAAADa/+v/AAABAAEAAADb/+r/AAABAAA
 tile_set = SubResource("TileSet_ig7tw")
 metadata/_edit_lock_ = true
 
+[node name="NPC" parent="." unique_id=1605588911 instance=ExtResource("3_h2yge")]
+
 [node name="Player" parent="." unique_id=574878769 instance=ExtResource("1_ig7tw")]
 
-[node name="wall" type="StaticBody2D" parent="." unique_id=2006971788]
-position = Vector2(600, 0)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=329213807]
 
-[node name="Parede" type="Polygon2D" parent="wall" unique_id=283218462]
-polygon = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall" unique_id=1005838742]
-shape = SubResource("RectangleShape2D_ig7tw")
-
-[node name="wall2" type="StaticBody2D" parent="." unique_id=2053536837]
-position = Vector2(1200, 0)
-
-[node name="Parede" type="Polygon2D" parent="wall2" unique_id=1246861103]
-polygon = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall2" unique_id=539367607]
-shape = SubResource("RectangleShape2D_ig7tw")
-
-[node name="wall3" type="StaticBody2D" parent="." unique_id=1101005209]
-position = Vector2(10, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall3" unique_id=1688753812]
-shape = SubResource("RectangleShape2D_ig7tw")
-
-[node name="Parede" type="Polygon2D" parent="wall3" unique_id=1565699284]
-polygon = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
-
-[node name="wall4" type="StaticBody2D" parent="." unique_id=53117547]
-position = Vector2(600, 0)
-
-[node name="Parede" type="Polygon2D" parent="wall4" unique_id=1379269831]
-polygon = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall4" unique_id=355242057]
-shape = SubResource("RectangleShape2D_ig7tw")
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=462051725]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "Olá!"

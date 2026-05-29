@@ -1,12 +1,25 @@
 [gd_scene format=3 uid="uid://fvl8my7u4cr6"]
 
+[ext_resource type="Script" uid="uid://dqyxb37nxj8n" path="res://NPC_script.gd" id="1_ideak"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ideak"]
+size = Vector2(100, 100)
+
 [node name="NPC" type="CharacterBody2D" unique_id=1605588911]
+position = Vector2(100, 0)
+script = ExtResource("1_ideak")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=929492985]
+modulate = Color(0.2084474, 0.23649353, 0.44425797, 1)
+self_modulate = Color(0.6992204, 0.99689573, 0.93916076, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1304502577]
+shape = SubResource("RectangleShape2D_ideak")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1834654055]
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=937950635]
 polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
