@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4a2rpsov2q85"
-path="res://.godot/imported/andando_esquerda.png-9bc2ff5b6a831cde14918bf71bce0558.ctex"
+uid="uid://bueel0tbrsbje"
+path="res://.godot/imported/idle_left.png-2f7a202c82109f8a03f6a95ca19d7ade.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/andando_esquerda.png"
-dest_files=["res://.godot/imported/andando_esquerda.png-9bc2ff5b6a831cde14918bf71bce0558.ctex"]
+source_file="res://player/idle_left.png"
+dest_files=["res://.godot/imported/idle_left.png-2f7a202c82109f8a03f6a95ca19d7ade.ctex"]
 
 [params]
 

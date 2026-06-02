@@ -1,9 +1,25 @@
 [gd_scene format=3 uid="uid://fvl8my7u4cr6"]
 
 [ext_resource type="Script" uid="uid://dqyxb37nxj8n" path="res://NPC_script.gd" id="1_ideak"]
+[ext_resource type="Texture2D" uid="uid://bye65bjxv23lw" path="res://npc/monge_NPC.png" id="2_xxcha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ideak"]
 size = Vector2(100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh24r"]
+atlas = ExtResource("2_xxcha")
+region = Rect2(466, 0, 466, 851)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ul7y6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh24r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="NPC" type="CharacterBody2D" unique_id=1605588911]
 position = Vector2(100, 0)
@@ -18,8 +34,10 @@ shape = SubResource("RectangleShape2D_ideak")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1834654055]
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=937950635]
-polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=941685187]
+position = Vector2(0, 1.0000019)
+scale = Vector2(0.107027896, 0.10702789)
+sprite_frames = SubResource("SpriteFrames_ul7y6")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

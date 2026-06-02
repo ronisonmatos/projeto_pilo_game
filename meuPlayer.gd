@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 
+var last_direction = "down"
+
 func _physics_process(delta):
 
 	var direction = Vector2.ZERO
@@ -26,15 +28,38 @@ func _physics_process(delta):
 
 	if direction != Vector2.ZERO:
 
-		if anim.animation != "walk_down":
-			anim.play("walk_down")
+		if abs(direction.x) > abs(direction.y):
 
-		if direction.x < 0:
-			anim.flip_h = true
-		elif direction.x > 0:
-			anim.flip_h = false
+			if direction.x > 0:
+				last_direction = "right"
+				anim.play("walk_right")
+
+			else:
+				last_direction = "left"
+				anim.play("walk_left")
+
+		else:
+
+			if direction.y > 0:
+				last_direction = "down"
+				anim.play("walk_down")
+
+			else:
+				last_direction = "up"
+				anim.play("walk_up")
 
 	else:
 
-		if anim.animation != "idle_down":
-			anim.play("idle_down")
+		match last_direction:
+
+			"down":
+				anim.play("idle_down")
+
+			"up":
+				anim.play("idle_up")
+
+			"left":
+				anim.play("idle_left")
+
+			"right":
+				anim.play("idle_right")
