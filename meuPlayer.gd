@@ -5,8 +5,19 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 
 var last_direction = "down"
+var espada_equipada = true
+var atacando = false
 
 func _physics_process(delta):
+
+	if Input.is_action_just_pressed("attack"):
+		print("ATAQUE!")
+		atacar()
+
+	# Bloqueia as animações de movimento durante o ataque
+	if atacando:
+		move_and_slide()
+		return
 
 	var direction = Vector2.ZERO
 
@@ -49,6 +60,41 @@ func _physics_process(delta):
 				anim.play("walk_up")
 
 	else:
+
+		match last_direction:
+
+			"down":
+				anim.play("idle_down")
+
+			"up":
+				anim.play("idle_up")
+
+			"left":
+				anim.play("idle_left")
+
+			"right":
+				anim.play("idle_right")
+
+
+func atacar():
+
+	if atacando:
+		return
+
+	print("Função Atacar")
+
+	atacando = true
+
+	anim.play("attack_right")
+
+
+func _on_animated_sprite_2d_animation_finished():
+
+	print("ANIMAÇÃO TERMINOU")
+
+	if anim.animation == "attack_right":
+
+		atacando = false
 
 		match last_direction:
 

@@ -4156,13 +4156,16 @@ tile_set = SubResource("TileSet_82xsv")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=329213807]
 
 [node name="DialogBox" type="Panel" parent="CanvasLayer" unique_id=1583340651]
-anchors_preset = -1
-anchor_top = 0.42000002
-anchor_bottom = 0.42000002
-offset_left = -248.0
-offset_top = -96.16
-offset_right = 252.0
-offset_bottom = 43.839996
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -140.0
+offset_right = 250.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("16_2cqfq")
 
 [node name="Portrait" type="TextureRect" parent="CanvasLayer/DialogBox" unique_id=1660319061]
@@ -4179,6 +4182,7 @@ offset_left = 160.0
 offset_top = 16.0
 offset_right = 200.0
 offset_bottom = 39.0
+theme_override_colors/font_color = Color(0.9194114, 0.5661991, 0.22032699, 1)
 
 [node name="Text" type="RichTextLabel" parent="CanvasLayer/DialogBox" unique_id=1347802121]
 layout_mode = 0

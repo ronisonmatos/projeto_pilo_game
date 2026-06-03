@@ -2,13 +2,23 @@
 
 [ext_resource type="Script" uid="uid://dvskinqptir4p" path="res://meuPlayer.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://dwacudv8jg0uy" path="res://player/idle_down.png" id="2_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://baegs45jcicm0" path="res://player/player_attack1.png" id="2_pylmc"]
 [ext_resource type="Texture2D" uid="uid://bueel0tbrsbje" path="res://player/idle_left.png" id="3_dw050"]
+[ext_resource type="Texture2D" uid="uid://b5f8jjrjkvp4f" path="res://player/player_attack2.png" id="3_pbfsw"]
 [ext_resource type="Texture2D" uid="uid://4a2rpsov2q85" path="res://player/walk_left.png" id="3_sweqy"]
 [ext_resource type="Texture2D" uid="uid://s2ttxem6s27c" path="res://player/walk_right.png" id="4_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://dkp3dloayhna2" path="res://player/player_attack3.png" id="4_5tmop"]
 [ext_resource type="Texture2D" uid="uid://dfoo3olbshtr4" path="res://player/idle_right.png" id="4_b26j0"]
 [ext_resource type="Texture2D" uid="uid://8gkig48bkvm4" path="res://player/walk_up.png" id="5_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://bjlb4glvcbf26" path="res://player/player_attack4.png" id="5_7ahtn"]
 [ext_resource type="Texture2D" uid="uid://dttkd76q0w2sp" path="res://player/idle_up.png" id="5_b26j0"]
+[ext_resource type="Texture2D" uid="uid://b3vc1mv0p4mam" path="res://player/player_attack5.png" id="6_7lmhl"]
 [ext_resource type="Texture2D" uid="uid://b757wup5d4g2c" path="res://player/walk_down.png" id="6_b26j0"]
+[ext_resource type="Texture2D" uid="uid://6h0ruvvybdit" path="res://player/player_attack6.png" id="7_dx0e4"]
+[ext_resource type="Texture2D" uid="uid://bbaufovp5ikwp" path="res://player/player_attack7.png" id="8_jm5j8"]
+[ext_resource type="Texture2D" uid="uid://bhioynddgkulj" path="res://player/player_attack8.png" id="9_7hik5"]
+[ext_resource type="Texture2D" uid="uid://coe8cghxge4gm" path="res://player/player_attack9.png" id="10_qtqh7"]
+[ext_resource type="Texture2D" uid="uid://go7rh8wl8nwu" path="res://player/player_attack10.png" id="11_2wuci"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
 atlas = ExtResource("2_2hs0m")
@@ -92,6 +102,41 @@ region = Rect2(1710, 0, 570, 992)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sweqy"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pylmc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pbfsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5tmop")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7ahtn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7lmhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dx0e4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jm5j8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7hik5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qtqh7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2wuci")
+}],
+"loop": false,
+"name": &"attack_right",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1jxqw")
@@ -200,13 +245,16 @@ size = Vector2(27, 18)
 script = ExtResource("1_4flbx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=889490091]
+texture_filter = 1
 position = Vector2(4, 1)
-scale = Vector2(0.09565677, 0.095656775)
+scale = Vector2(0.097, 0.097)
 sprite_frames = SubResource("SpriteFrames_sweqy")
-animation = &"walk_up"
+animation = &"idle_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1870184720]
 position = Vector2(3.5, 38)
 shape = SubResource("RectangleShape2D_4flbx")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1445528792]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
