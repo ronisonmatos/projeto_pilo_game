@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ideak"]
 size = Vector2(100, 100)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
+size = Vector2(40, 80)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kh24r"]
 atlas = ExtResource("2_xxcha")
 region = Rect2(466, 0, 466, 851)
@@ -33,6 +36,7 @@ self_modulate = Color(0.6992204, 0.99689573, 0.93916076, 1)
 shape = SubResource("RectangleShape2D_ideak")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1834654055]
+shape = SubResource("RectangleShape2D_xxcha")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=941685187]
 position = Vector2(0, 1.0000019)

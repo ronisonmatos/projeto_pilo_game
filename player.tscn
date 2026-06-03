@@ -194,7 +194,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4flbx"]
-size = Vector2(50, 50)
+size = Vector2(27, 18)
 
 [node name="Player" type="CharacterBody2D" unique_id=574878769]
 script = ExtResource("1_4flbx")
@@ -206,6 +206,7 @@ sprite_frames = SubResource("SpriteFrames_sweqy")
 animation = &"walk_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1870184720]
+position = Vector2(3.5, 38)
 shape = SubResource("RectangleShape2D_4flbx")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1445528792]
