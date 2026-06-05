@@ -16,7 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://c6s7lbjli6852" path="res://tiles/sombra_escada.png" id="13_vivmo"]
 [ext_resource type="Texture2D" uid="uid://ewhjdf8dw4h0" path="res://tiles/TX Tileset Grass.png" id="14_1u8w0"]
 [ext_resource type="Script" uid="uid://b2nehtdqio2yc" path="res://dialog_box.gd" id="16_2cqfq"]
+[ext_resource type="Script" uid="uid://c4c6pc7m4h6cd" path="res://NPC_teste.gd" id="16_d13ii"]
 [ext_resource type="Texture2D" uid="uid://dhfjdwvgxn700" path="res://npc/perfil_monge.png" id="17_yaehf"]
+[ext_resource type="Texture2D" uid="uid://dlj0iejf2bhgt" path="res://ui/vida_moldura.png" id="18_cegan"]
+[ext_resource type="Script" uid="uid://b0funlwktsxft" path="res://hud.gd" id="18_ryguw"]
+[ext_resource type="Texture2D" uid="uid://b2q81butv2thn" path="res://ui/vida_barra.png.png" id="19_82xsv"]
+[ext_resource type="Texture2D" uid="uid://dfp2ancwei7yi" path="res://ui/fe_moldura.png" id="20_getpj"]
+[ext_resource type="Texture2D" uid="uid://1jf87v80c5xj" path="res://ui/fe_barra.png" id="21_ryguw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2cqfq"]
 texture = ExtResource("13_vivmo")
@@ -4115,6 +4121,9 @@ texture = ExtResource("10_82xsv")
 [sub_resource type="TileSet" id="TileSet_82xsv"]
 sources/0 = SubResource("TileSetAtlasSource_cegan")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryguw"]
+size = Vector2(38, 43)
+
 [node name="Main" type="Node2D" unique_id=2037170575]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1057519129]
@@ -4153,6 +4162,17 @@ tile_set = SubResource("TileSet_82xsv")
 
 [node name="Player" parent="." unique_id=574878769 instance=ExtResource("1_ig7tw")]
 
+[node name="NPC_Teste" type="CharacterBody2D" parent="." unique_id=799868285 groups=["enemy"]]
+script = ExtResource("16_d13ii")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC_Teste" unique_id=1418461000]
+position = Vector2(159, 176.5)
+shape = SubResource("RectangleShape2D_ryguw")
+
+[node name="Sprite2D" type="Sprite2D" parent="NPC_Teste" unique_id=703263726]
+position = Vector2(159, 176)
+texture = ExtResource("2_0xm2m")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=329213807]
 
 [node name="DialogBox" type="Panel" parent="CanvasLayer" unique_id=1583340651]
@@ -4190,3 +4210,42 @@ offset_left = 160.0
 offset_top = 40.0
 offset_right = 488.0
 offset_bottom = 120.0
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=676427068]
+script = ExtResource("18_ryguw")
+
+[node name="VidaMoldura" type="TextureRect" parent="HUD" unique_id=314285590]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1328.0
+offset_bottom = 326.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("18_cegan")
+
+[node name="VidaBarra" type="TextureProgressBar" parent="HUD/VidaMoldura" unique_id=1738926186]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 226.66666
+offset_top = 126.66666
+offset_right = 1116.6666
+offset_bottom = 235.66666
+value = 100.0
+texture_progress = ExtResource("19_82xsv")
+
+[node name="FeMoldura" type="TextureRect" parent="HUD" unique_id=1936501801]
+offset_left = 20.0
+offset_top = 65.0
+offset_right = 1328.0
+offset_bottom = 371.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("20_getpj")
+
+[node name="FeBarra" type="TextureProgressBar" parent="HUD/FeMoldura" unique_id=1567527575]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 226.66666
+offset_top = 126.66666
+offset_right = 1116.6666
+offset_bottom = 235.66666
+value = 100.0
+texture_progress = ExtResource("21_ryguw")
