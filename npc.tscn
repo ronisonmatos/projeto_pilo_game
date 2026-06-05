@@ -10,15 +10,11 @@ size = Vector2(100, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
 size = Vector2(40, 80)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kh24r"]
-atlas = ExtResource("2_xxcha")
-region = Rect2(466, 0, 466, 851)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_ul7y6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kh24r")
+"texture": ExtResource("2_xxcha")
 }],
 "loop": true,
 "name": &"default",
