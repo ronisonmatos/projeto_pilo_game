@@ -15,8 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://brlljtlo4jlk7" path="res://tiles/TX Struct.png" id="13_d13ii"]
 [ext_resource type="Texture2D" uid="uid://c6s7lbjli6852" path="res://tiles/sombra_escada.png" id="13_vivmo"]
 [ext_resource type="Texture2D" uid="uid://ewhjdf8dw4h0" path="res://tiles/TX Tileset Grass.png" id="14_1u8w0"]
+[ext_resource type="PackedScene" uid="uid://dbv4in0jmto2f" path="res://floating_number.tscn" id="16_1u8w0"]
 [ext_resource type="Script" uid="uid://b2nehtdqio2yc" path="res://dialog_box.gd" id="16_2cqfq"]
-[ext_resource type="Script" uid="uid://c4c6pc7m4h6cd" path="res://NPC_teste.gd" id="16_d13ii"]
+[ext_resource type="PackedScene" uid="uid://u4tym4b301gd" path="res://npc_wolf.tscn" id="16_d13ii"]
 [ext_resource type="Texture2D" uid="uid://dhfjdwvgxn700" path="res://npc/perfil_monge.png" id="17_yaehf"]
 [ext_resource type="Texture2D" uid="uid://dlj0iejf2bhgt" path="res://ui/vida_moldura.png" id="18_cegan"]
 [ext_resource type="Script" uid="uid://b0funlwktsxft" path="res://hud.gd" id="18_ryguw"]
@@ -2988,6 +2989,7 @@ texture = ExtResource("14_1u8w0")
 
 [sub_resource type="TileSet" id="TileSet_facbu"]
 physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_lswn8")
 sources/2 = SubResource("TileSetAtlasSource_qsp4k")
 sources/6 = SubResource("TileSetAtlasSource_jq2sk")
@@ -3000,6 +3002,11 @@ sources/8 = SubResource("TileSetAtlasSource_0rl1p")
 sources/5 = SubResource("TileSetAtlasSource_htxhm")
 sources/4 = SubResource("TileSetAtlasSource_seu75")
 sources/3 = SubResource("TileSetAtlasSource_kq58d")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_d13ii"]
+vertices = PackedVector2Array(1296, 1077, -1363, 1077, -1363, -557.0078, 1296, -560.97656)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1373, -567, -1373, 1087, 1306, 1087, 1306, -571)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vivmo"]
 texture = ExtResource("9_cegan")
@@ -4121,9 +4128,6 @@ texture = ExtResource("10_82xsv")
 [sub_resource type="TileSet" id="TileSet_82xsv"]
 sources/0 = SubResource("TileSetAtlasSource_cegan")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryguw"]
-size = Vector2(38, 43)
-
 [node name="Main" type="Node2D" unique_id=2037170575]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1057519129]
@@ -4139,6 +4143,9 @@ tile_set = SubResource("TileSet_facbu")
 position = Vector2(10, 0)
 tile_map_data = PackedByteArray("AAD6//j/CwAEAAIAAAD7//j/CwAFAAIAAAD8//j/CwAGAAIAAAD9//j/CwADAAIAAAD9/xUACQAFAA4AAAD9/xYACQAGAA4AAAD+//j/CwAEAAIAAAD+/xUACQAGAAwAAAD+/xYACQAFAA0AAAD///j/CwAFAAIAAAD//xUACQAFAA0AAAD//xYACQAFAAgAAAAAAPj/CwAGAAIAAAAAABUACQAFAAsAAAAAABYACQAGAAoAAAABAPj/CwADAAIAAAACAPj/CwAEAAIAAAADAPj/CwAFAAIAAAAEAPj/CwAGAAIAAAAFAPj/CwADAAIAAAAGAPj/CwAEAAIAAAAHAPj/CwAFAAIAAAAIAPj/CwAGAAIAAAAJAPj/CwAHAAIAAAAJAPn/CwAHAAMAAAAJAPr/CwAHAAQAAAAJAPv/CwAHAAUAAAD+/w4ACQAGAAkAAAD+/w8ACQAFAAkAAAD+/xAACQAFAAcAAAD+/xEACQAGAAoAAAD+/xIACQAFAA0AAAD+/xMACQAGAAgAAAD//w4ACQAGAAYAAAD//w8ACQAGAAkAAAD//xAACQAFAAkAAAD//xEACQAFAAwAAAD//xIACQAFAAkAAAD+/wsACQAGAAwAAAD+/wwACQAGAAgAAAD+/w0ACQAFAA4AAAD//wsACQAGAA0AAAD//wwACQAGAAgAAAD//w0ACQAFAAoAAAAJAPz/CwAHAAMAAAAJAP3/CwAHAAQAAAAJAP//CwAHAAMAAAAJAAAACwAHAAQAAAD0//v/CwACAAUAAAD0//z/CwACAAUAAAD0//3/CwACAAMAAAD0////CwACAAUAAAD0/wAACwACAAQAAAD0/wEACwACAAUAAAD0/wIACwACAAYAAAD0/wMACwACAAcAAAD0/wQACwACAAgAAAD0/wUACwACAAkAAAD1/wMACwACAA0AAAD1/wQACwACAA4AAAD1/wUACwACAA8AAAD+/wkACQAGAAcAAAD+/woACQAGAAgAAAD//wkACQAFAA0AAAD//woACQAGAAkAAAD+/wIACAAPAAIAAAD+/wMACAAPAAMAAAD+/wQACAAPAAQAAAD+/wUACAAPAAUAAAD//wIACAAKAAoAAAD//wMACAAKAAsAAAD//wQACAAKAAwAAAAAAAIACAALAAoAAAAAAAMACAALAAsAAAAAAAQACAALAAwAAAAAAAcACAALAA8AAAABAAIACwACAAwAAAABAAMACwACAA0AAAABAAQACwACAA4AAAABAAUACwACAA8AAAABAAYACAAMAA4AAAACAAIACwADAAwAAAACAAMACwADAA0AAAACAAQACwADAA4AAAACAAUACwADAA8AAAADAAIACwAEAAwAAAADAAMACwAEAA0AAAADAAQACwAEAA4AAAADAAUACwAEAA8AAAAEAAIACwAFAAwAAAAEAAMACwAFAA0AAAAEAAQACwAFAA4AAAAEAAUACwAFAA8AAAAFAAIACwAGAAwAAAAFAAMACwAGAA0AAAAFAAQACwAGAA4AAAAFAAUACwAGAA8AAAAGAAIACwAHAAwAAAAGAAMACwAHAA0AAAAGAAQACwAHAA4AAAAGAAUACwAHAA8AAAAHAAIACwAIAAwAAAAHAAMACwAIAA0AAAAHAAQACwAIAA4AAAAHAAUACwAIAA8AAAAIAAIACwAJAAwAAAAIAAMACwAJAA0AAAAIAAQACwAJAA4AAAAIAAUACwAJAA8AAAD1/wIACwACAAwAAAD2/wIACwADAAwAAAD2/wMACwADAA0AAAD2/wQACwADAA4AAAD2/wUACwADAA8AAAD3/wIACwAEAAwAAAD3/wMACwAEAA0AAAD3/wQACwAEAA4AAAD3/wUACwAEAA8AAAD4/wIACwAFAAwAAAD4/wMACwAFAA0AAAD4/wQACwAFAA4AAAD4/wUACwAFAA8AAAD5/wIACwAGAAwAAAD5/wMACwAGAA0AAAD5/wQACwAGAA4AAAD5/wUACwAGAA8AAAD6/wIACwAHAAwAAAD6/wQACwAHAA4AAAD6/wUACwAHAA8AAAD7/wIACwAIAAwAAAD7/wMACwAIAA0AAAD7/wQACwAIAA4AAAD7/wUACwAIAA8AAAD8/wIACwAJAAwAAAD8/wMACwAJAA0AAAD8/wQACwAJAA4AAAD8/wUACwAJAA8AAAAJAAEACwAHAAUAAAAJAAIACwAHAAYAAAAJAAMACwAHAAcAAAAJAAQACwAHAAgAAAAJAAUACwAHAAkAAAAJAP7/CwAHAAUAAAD0//7/CwACAAQAAAD0//j/CwACAAIAAAD0//n/CwACAAMAAAD0//r/CwACAAQAAAD1//j/CwADAAIAAAD2//j/CwAEAAIAAAD3//j/CwAFAAIAAAD4//j/CwAGAAIAAAD5//j/CwADAAIAAAAKAPv/CwAKAAIAAAAKAPz/CwAKAAMAAAAKAP3/CwAKAAQAAAAKAP7/CwAKAAUAAAALAPv/CwALAAIAAAALAPz/CwALAAMAAAALAP3/CwALAAQAAAALAP7/CwALAAUAAAAMAPv/CwAMAAIAAAAMAPz/CwAMAAMAAAAMAP3/CwAMAAQAAAAMAP7/CwAMAAUAAAANAPv/CwANAAIAAAANAPz/CwANAAMAAAANAP3/CwANAAQAAAANAP7/CwANAAUAAAAOAPv/CwALAAIAAAAOAPz/CwALAAMAAAAOAP3/CwALAAQAAAAOAP7/CwALAAUAAAAPAPv/CwAMAAIAAAAPAPz/CwAMAAMAAAAPAP3/CwAMAAQAAAAPAP7/CwAMAAUAAAAQAPv/CwANAAIAAAAQAPz/CwANAAMAAAAQAP3/CwANAAQAAAAQAP7/CwANAAUAAAARAPv/CwAOAAIAAAARAPz/CwAOAAMAAAARAP3/CwAOAAQAAAARAP7/CwAOAAUAAAASAPv/CwALAAIAAAASAPz/CwALAAMAAAASAP3/CwALAAQAAAASAP7/CwALAAUAAAATAPv/CwAMAAIAAAATAPz/CwAMAAMAAAATAP3/CwAMAAQAAAATAP7/CwAMAAUAAAAUAPv/CwANAAIAAAAUAPz/CwANAAMAAAAUAP3/CwANAAQAAAAUAP7/CwANAAUAAAAVAPv/CwAOAAIAAAAVAPz/CwAOAAMAAAAVAP3/CwAOAAQAAAAVAP7/CwAOAAUAAAAWAPv/CwAQAAIAAAAWAPz/CwAQAAMAAAAWAP3/CwAQAAQAAAAWAP7/CwAQAAUAAAAWAP//CwAQAAYAAAD///r/BAAXAAwAAAD///v/CQALAAwAAAD///z/BAAXAA4AAAAAAPr/BAAYAAwAAAAAAPv/CQALAAwAAAAAAPz/CQAKAA4AAAD+//v/CQALAAwAAAD+//z/CQALAAwAAAD+//3/CQAIAAwAAAD///3/CQAKAAwAAAAAAP3/CQAJAA8AAAD9//z/CQAIAAwAAAABAP3/CQALAAwAAAABAP7/CQALAAwAAAAAAP7/CQAIAAwAAAD///7/CQALAAwAAAD+//7/CQALAAwAAAD9//3/CQALAAwAAAD9//v/CQAJAA8AAAD9//7/CQALAAwAAAABAPv/CQAJAA8AAAD//wgACQAFAAoAAAD+/wgACQAGAAgAAAD//wUACAAKAA0AAAD9/wIACAAOAAIAAAD9/wMACAAOAAMAAAD9/wQACAAOAAQAAAD9/wUACAAOAAUAAAD9/wYACAAOAAYAAAD9/wcACAAOAAcAAAAAAAUACAALAA0AAAAAAAYACAALAA4AAAD//wYACAAKAA4AAAD//wcACAAKAA8AAAD+/wYACAAPAAYAAAD+/wcACAAPAAcAAAD6/wMACwAHAA0AAAD4/wwABQAKAA0AAAD4/w0ABQAKAA4AAAD4/w4ABQAKAA8AAAD5/wwABQALAA0AAAD5/w0ABQALAA4AAAD5/w4ABQALAA8AAAA=")
 tile_set = SubResource("TileSet_facbu")
+
+[node name="NavigationRegion" type="NavigationRegion2D" parent="." unique_id=1176560573]
+navigation_polygon = SubResource("NavigationPolygon_d13ii")
 
 [node name="NPC" parent="." unique_id=1605588911 instance=ExtResource("3_h2yge")]
 position = Vector2(93, -27)
@@ -4161,17 +4168,16 @@ tile_map_data = PackedByteArray("AAD+//n/AAAbAAQAAAD+//r/AAAbAAUAAAD///b/AAAcAAE
 tile_set = SubResource("TileSet_82xsv")
 
 [node name="Player" parent="." unique_id=574878769 instance=ExtResource("1_ig7tw")]
+position = Vector2(-5, 217)
+floating_number_scene = ExtResource("16_1u8w0")
 
-[node name="NPC_Teste" type="CharacterBody2D" parent="." unique_id=799868285 groups=["enemy"]]
-script = ExtResource("16_d13ii")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC_Teste" unique_id=1418461000]
+[node name="npc_wolf" parent="." unique_id=1127985159 instance=ExtResource("16_d13ii")]
 position = Vector2(159, 176.5)
-shape = SubResource("RectangleShape2D_ryguw")
+collision_layer = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="NPC_Teste" unique_id=703263726]
-position = Vector2(159, 176)
-texture = ExtResource("2_0xm2m")
+[node name="npc_wolf2" parent="." unique_id=1061769269 instance=ExtResource("16_d13ii")]
+position = Vector2(246, 277)
+collision_layer = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=329213807]
 
@@ -4249,3 +4255,6 @@ offset_right = 1116.6666
 offset_bottom = 235.66666
 value = 100.0
 texture_progress = ExtResource("21_ryguw")
+
+[connection signal="faith_changed" from="Player" to="HUD" method="on_faith_changed"]
+[connection signal="health_changed" from="Player" to="HUD" method="on_health_changed"]

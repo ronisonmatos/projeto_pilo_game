@@ -1,37 +1,65 @@
 extends CharacterBody2D
 
-@export var speed = 200
-@onready var anim = $AnimatedSprite2D
-@onready var hitbox = $Hitbox
+# ---------------------------------------------------------------------------
+# Sinais
+# ---------------------------------------------------------------------------
+signal health_changed(new_value: int, max_value: int)
+signal faith_changed(new_value: int, max_value: int)
+signal player_died()
 
-var last_direction := "down"
-var atacando := false
-var vida = 100
-var fe = 100
+# ---------------------------------------------------------------------------
+# Exportações / configuração
+# ---------------------------------------------------------------------------
+@export var move_speed:       float = 200.0
+@export var max_health:       int   = 100
+@export var max_faith:        int   = 100
+@export var attack_damage:    int   = 5
+@export var faith_cost_attack: int  = 1
+@export var floating_number_scene: PackedScene
 
-func _physics_process(_delta):
+# ---------------------------------------------------------------------------
+# Nós filhos
+# ---------------------------------------------------------------------------
+@onready var _anim:         AnimatedSprite2D       = $AnimatedSprite2D
+@onready var _hitbox:       Area2D                 = $Hitbox
+@onready var _attack_sound: AudioStreamPlayer2D    = $AttackSound
+
+# ---------------------------------------------------------------------------
+# Estado interno
+# ---------------------------------------------------------------------------
+const ATTACK_HIT_FRAMES: Array[int] = [2, 6, 8]
+
+var _last_direction: String = "down"
+var _is_attacking:   bool   = false
+var _health:         int
+var _faith:          int
+
+# ---------------------------------------------------------------------------
+# Ciclo de vida
+# ---------------------------------------------------------------------------
+func _ready() -> void:
+	_health = max_health
+	_faith  = max_faith
+	await get_tree().process_frame
+	emit_signal("health_changed", _health, max_health)
+	emit_signal("faith_changed",  _faith,  max_faith)
+
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
-		atacar()
+		_start_attack()
 
-	if atacando:
+	if _is_attacking:
 		move_and_slide()
 		return
 
 	_handle_movement()
 
-func _handle_movement():
-	var direction := Vector2.ZERO
-
-	if Input.is_action_pressed("ui_right"):
-		direction.x += 1
-	if Input.is_action_pressed("ui_left"):
-		direction.x -= 1
-	if Input.is_action_pressed("ui_down"):
-		direction.y += 1
-	if Input.is_action_pressed("ui_up"):
-		direction.y -= 1
-
-	velocity = direction.normalized() * speed
+# ---------------------------------------------------------------------------
+# Movimento
+# ---------------------------------------------------------------------------
+func _handle_movement() -> void:
+	var direction := _read_input_direction()
+	velocity = direction.normalized() * move_speed
 	move_and_slide()
 
 	if direction != Vector2.ZERO:
@@ -39,82 +67,72 @@ func _handle_movement():
 	else:
 		_play_idle_animation()
 
-func _play_walk_animation(direction: Vector2):
+func _read_input_direction() -> Vector2:
+	var dir := Vector2.ZERO
+	dir.x = Input.get_axis("ui_left", "ui_right")
+	dir.y = Input.get_axis("ui_up",   "ui_down")
+	return dir
+
+# ---------------------------------------------------------------------------
+# Animações
+# ---------------------------------------------------------------------------
+func _play_walk_animation(direction: Vector2) -> void:
 	if abs(direction.x) > abs(direction.y):
-		if direction.x > 0:
-			last_direction = "right"
-			anim.play("walk_right")
-		else:
-			last_direction = "left"
-			anim.play("walk_left")
+		_last_direction = "right" if direction.x > 0 else "left"
 	else:
-		if direction.y > 0:
-			last_direction = "down"
-			anim.play("walk_down")
-		else:
-			last_direction = "up"
-			anim.play("walk_up")
+		_last_direction = "down" if direction.y > 0 else "up"
+	_anim.play("walk_" + _last_direction)
 
-func _play_idle_animation():
-	anim.play("idle_" + last_direction)
+func _play_idle_animation() -> void:
+	_anim.play("idle_" + _last_direction)
 
-func atacar():
-	if atacando:
+# ---------------------------------------------------------------------------
+# Ataque
+# ---------------------------------------------------------------------------
+func _start_attack() -> void:
+	if _is_attacking:
 		return
-	atacando = true
-	anim.play("attack_" + last_direction)
+	_is_attacking = true
+	spend_faith(faith_cost_attack)
+	_anim.play("attack_" + _last_direction)
 
-func _on_animated_sprite_2d_animation_finished():
-	if anim.animation.begins_with("attack_"):
-		atacando = false
-		hitbox.monitoring = false
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if _anim.animation.begins_with("attack_"):
+		_is_attacking      = false
+		_hitbox.monitoring = false
 		_play_idle_animation()
-				
-func _ready():
-	# Aguarda o HUD estar pronto na árvore
-	await get_tree().process_frame
 
-	var hud = get_node_or_null("/root/Main/HUD")
-	if hud:
-		hud.atualizar_vida(vida)
-		hud.atualizar_fe(fe)
-	else:
-		push_error("HUD não encontrado! Verifique o caminho /HUD")
-		
-#Remover esse teste da vida e da fé		
-func _input(event):
-
-	if event.is_action_pressed("ui_accept"):
-		vida -= 10
-
-		if vida < 0:
-			vida = 0
-
-		var hud = get_node("/root/Main/HUD")
-		hud.atualizar_vida(vida)
-		
-	if event.is_action_pressed("attack"):
-		fe -= 1
-
-		if fe < 0:
-			fe = 0
-
-		var hud = get_node("/root/Main/HUD")
-		hud.atualizar_fe(fe)
-
-
-func _on_animated_sprite_2d_frame_changed():
-	# Corrigido: begins_with em vez de == "attack"
-	if not anim.animation.begins_with("attack_"):
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if not _anim.animation.begins_with("attack_"):
 		return
-
-	if anim.frame in [2, 6, 8]:
-		$AttackSound.play()
-		hitbox.monitoring = true
+	if _anim.frame in ATTACK_HIT_FRAMES:
+		_attack_sound.play()
+		_hitbox.monitoring = true
 	else:
-		hitbox.monitoring = false
+		_hitbox.monitoring = false
 
-func _on_hitbox_body_entered(body):
-	print("Encostou em:", body.name)
-	if body.is_in_group("enemy"):
-		body.receber_dano(10)
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy") and body.has_method("take_damage"):
+		body.take_damage(attack_damage)
+
+# ---------------------------------------------------------------------------
+# Dano / status
+# ---------------------------------------------------------------------------
+func take_damage(amount: int) -> void:
+	_health = clampi(_health - amount, 0, max_health)
+	emit_signal("health_changed", _health, max_health)
+	_spawn_floating_number(amount)
+	if _health == 0:
+		emit_signal("player_died")
+
+func _spawn_floating_number(amount: int) -> void:
+	if not floating_number_scene:
+		return
+	var popup: Node2D = floating_number_scene.instantiate()
+	popup.position    = Vector2(randf_range(-10, 10), -40)
+	add_child(popup)
+	popup.setup(amount,  Color(0.631, 0.0, 0.056, 1.0))
+
+func spend_faith(amount: int) -> void:
+	_faith = clampi(_faith - amount, 0, max_faith)
+	emit_signal("faith_changed", _faith, max_faith)

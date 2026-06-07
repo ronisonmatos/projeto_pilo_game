@@ -351,12 +351,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4flbx"]
-size = Vector2(27, 18)
+size = Vector2(16, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5n4i"]
-size = Vector2(20, 48)
+size = Vector2(86, 17)
 
-[node name="Player" type="CharacterBody2D" unique_id=574878769]
+[node name="Player" type="CharacterBody2D" unique_id=574878769 groups=["player"]]
 script = ExtResource("1_4flbx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=889490091]
@@ -364,10 +364,10 @@ texture_filter = 1
 position = Vector2(4, 1)
 scale = Vector2(0.18, 0.18)
 sprite_frames = SubResource("SpriteFrames_sweqy")
-animation = &"idle_down"
+animation = &"attack_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1870184720]
-position = Vector2(3.5, 38)
+position = Vector2(5, 42.5)
 shape = SubResource("RectangleShape2D_4flbx")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1445528792]
@@ -377,10 +377,12 @@ stream = ExtResource("30_j5n4i")
 max_polyphony = 3
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1260197845]
+position = Vector2(3, 0)
+collision_mask = 3
 monitoring = false
 
 [node name="RectangleShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=958524788]
-position = Vector2(4, -2)
+position = Vector2(4, 9)
 shape = SubResource("RectangleShape2D_j5n4i")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
