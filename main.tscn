@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://b2q81butv2thn" path="res://ui/vida_barra.png.png" id="19_82xsv"]
 [ext_resource type="Texture2D" uid="uid://dfp2ancwei7yi" path="res://ui/fe_moldura.png" id="20_getpj"]
 [ext_resource type="Texture2D" uid="uid://1jf87v80c5xj" path="res://ui/fe_barra.png" id="21_ryguw"]
+[ext_resource type="Texture2D" uid="uid://dcosh4fqd335n" path="res://ui/box_missio.png" id="22_missbox"]
+[ext_resource type="Texture2D" uid="uid://8p2nm7y131su" path="res://ui/placa_missio.png" id="23_missplaca"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2cqfq"]
 texture = ExtResource("13_vivmo")
@@ -4256,5 +4258,61 @@ offset_bottom = 235.66666
 value = 100.0
 texture_progress = ExtResource("21_ryguw")
 
+[node name="MissaoBtn" type="TextureButton" parent="HUD" unique_id=-1393967295]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 80.0
+texture_normal = ExtResource("23_missplaca")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MissaoCaixa" type="Control" parent="HUD" unique_id=-1393967294]
+visible = false
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -420.0
+offset_top = 90.0
+offset_right = -10.0
+offset_bottom = 380.0
+
+[node name="BoxBG" type="TextureRect" parent="HUD/MissaoCaixa" unique_id=-1393967293]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -78.56
+offset_right = 78.44
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("22_missbox")
+
+[node name="MissaoImagem" type="TextureRect" parent="HUD/MissaoCaixa" unique_id=-1393967292]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 120.0
+offset_bottom = 120.0
+stretch_mode = 1
+
+[node name="MissaoTexto" type="RichTextLabel" parent="HUD/MissaoCaixa" unique_id=-1393967291]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 101.0
+offset_right = 321.0
+offset_bottom = 175.0
+pivot_offset = Vector2(500, 0)
+tooltip_text = "Missão"
+theme_override_colors/default_color = Color(0.9194114, 0.5661991, 0.22032699, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9607843)
+text = "Derrote todos os lobos!"
+
 [connection signal="faith_changed" from="Player" to="HUD" method="on_faith_changed"]
 [connection signal="health_changed" from="Player" to="HUD" method="on_health_changed"]
+[connection signal="pressed" from="HUD/MissaoBtn" to="HUD" method="_on_missao_btn_pressed"]
