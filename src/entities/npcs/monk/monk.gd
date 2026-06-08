@@ -3,13 +3,13 @@ extends CharacterBody2D
 # ---------------------------------------------------------------------------
 # Sinais
 # ---------------------------------------------------------------------------
-signal dialogue_requested()
+signal dialogue_requested(dialogue_id: String)
 
 # ---------------------------------------------------------------------------
 # Exportações / configuração
 # ---------------------------------------------------------------------------
-## Dados do diálogo que este NPC deve exibir (configurável pelo inspetor)
-@export var dialogue_id: String = ""
+## ID do diálogo que este NPC inicia. Deve corresponder a uma chave em DialogueDatabase.
+@export var dialogue_id: String = "monk_intro"
 
 # ---------------------------------------------------------------------------
 # Nós filhos
@@ -19,38 +19,33 @@ signal dialogue_requested()
 # ---------------------------------------------------------------------------
 # Estado interno
 # ---------------------------------------------------------------------------
-var _player_nearby:       bool = false
-var _dialogue_played:     bool = false
-var _dialogue_box: Node        = null
+var _player_nearby:   bool = false
+var _dialogue_played: bool = false
 
 # ---------------------------------------------------------------------------
 # Ciclo de vida
 # ---------------------------------------------------------------------------
 func _ready() -> void:
 	_interaction_icon.visible = false
-	_dialogue_box = get_node_or_null("/root/Main/CanvasLayer/DialogBox")
-	if not _dialogue_box:
-		push_error("[NPC] DialogBox não encontrado em /root/Main/CanvasLayer/DialogBox")
+	# Reseta o estado quando um diálogo termina, permitindo nova conversa
+	EventBus.dialogue_finished.connect(_on_dialogue_finished)
 
-func _process(_delta: float) -> void:
-	if _can_start_dialogue() and Input.is_action_just_pressed("ui_accept"):
+# ---------------------------------------------------------------------------
+# Input — usa _unhandled_input para não conflitar com a caixa de diálogo
+# ---------------------------------------------------------------------------
+func _unhandled_input(event: InputEvent) -> void:
+	if not _player_nearby or _dialogue_played or EventBus.dialogue_active:
+		return
+	if event.is_action_pressed("ui_accept"):
 		_start_dialogue()
 
 # ---------------------------------------------------------------------------
 # Lógica de diálogo
 # ---------------------------------------------------------------------------
-func _can_start_dialogue() -> bool:
-	return (
-		_player_nearby
-		and not _dialogue_played
-		and _dialogue_box != null
-		and not _dialogue_box.dialogo_ativo
-	)
-
 func _start_dialogue() -> void:
 	_dialogue_played = true
-	_dialogue_box.iniciar_dialogo()
-	emit_signal("dialogue_requested")
+	EventBus.dialogue_requested.emit(dialogue_id)
+	dialogue_requested.emit(dialogue_id)
 
 # ---------------------------------------------------------------------------
 # Sinais de área
@@ -67,3 +62,11 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	_player_nearby            = false
 	_dialogue_played          = false
 	_interaction_icon.visible = false
+
+# ---------------------------------------------------------------------------
+# Callbacks do EventBus
+# ---------------------------------------------------------------------------
+func _on_dialogue_finished() -> void:
+	# Permite que o NPC inicie diálogo novamente após o atual ser concluído
+	if _player_nearby:
+		_dialogue_played = false

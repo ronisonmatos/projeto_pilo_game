@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://fvl8my7u4cr6"]
 
-[ext_resource type="Script" uid="uid://dqyxb37nxj8n" path="res://NPC_script.gd" id="1_ideak"]
+[ext_resource type="Script" uid="uid://dqyxb37nxj8n" path="res://src/entities/npcs/monk/monk.gd" id="1_ideak"]
 [ext_resource type="Texture2D" uid="uid://bye65bjxv23lw" path="res://npc/monge_NPC.png" id="2_xxcha"]
 [ext_resource type="Texture2D" uid="uid://b2if0gyw10as0" path="res://ui/interaction.png" id="3_kh24r"]
 

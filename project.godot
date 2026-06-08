@@ -14,6 +14,11 @@ config/name="projeto_virtutes_game"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EventBus="*res://src/autoloads/event_bus.gd"
+DialogueDatabase="*res://src/autoloads/dialogue_database.gd"
+
 [display]
 
 window/size/viewport_width=1280

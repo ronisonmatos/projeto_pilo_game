@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dbv4in0jmto2f"]
 
-[ext_resource type="Script" uid="uid://bbyp17a5qtf3i" path="res://FloatingNumber.gd" id="1_t72f8"]
+[ext_resource type="Script" uid="uid://bbyp17a5qtf3i" path="res://src/systems/combat/floating_number/floating_number.gd" id="1_t72f8"]
 
 [node name="FloatingNumber" type="Node2D" unique_id=425437510]
 script = ExtResource("1_t72f8")

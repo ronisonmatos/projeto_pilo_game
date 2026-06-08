@@ -36,17 +36,16 @@ func _process(delta: float) -> void:
 	_elapsed   += delta
 	position.y -= rise_speed * delta
 	modulate.a  = 1.0 - (_elapsed / duration)
-
 	if _elapsed >= duration:
 		queue_free()
 
 # ---------------------------------------------------------------------------
-# Interface pública — só aplica o texto, posição já foi definida antes
+# Interface pública
 # ---------------------------------------------------------------------------
 func setup(amount: int, custom_color: Color = Color(-1, -1, -1)) -> void:
-	if _label:
-		_label.text  = "-%d" % amount
-		_shadow.text = "-%d" % amount
-		# Sobrescreve a cor se uma foi passada
-		if custom_color.r >= 0:
-			_label.add_theme_color_override("font_color", custom_color)
+	if not _label:
+		return
+	_label.text  = "-%d" % amount
+	_shadow.text = "-%d" % amount
+	if custom_color.r >= 0:
+		_label.add_theme_color_override("font_color", custom_color)
