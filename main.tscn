@@ -4183,9 +4183,9 @@ collision_layer = 2
 position = Vector2(246, 277)
 collision_layer = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=329213807]
+[node name="DialogBox" type="CanvasLayer" parent="." unique_id=329213807]
 
-[node name="DialogBox" type="Panel" parent="CanvasLayer" unique_id=1583340651]
+[node name="DialogBox" type="Panel" parent="DialogBox" unique_id=1583340651]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -4198,15 +4198,15 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("16_2cqfq")
 
-[node name="Portrait" type="TextureRect" parent="CanvasLayer/DialogBox" unique_id=1660319061]
+[node name="Portrait" type="TextureRect" parent="DialogBox/DialogBox" unique_id=1660319061]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 139.0
-offset_bottom = 139.0
+offset_right = 142.0
+offset_bottom = 142.0
 texture = ExtResource("17_yaehf")
 
-[node name="Name" type="Label" parent="CanvasLayer/DialogBox" unique_id=1662297533]
+[node name="Name" type="Label" parent="DialogBox/DialogBox" unique_id=1662297533]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 16.0
@@ -4214,7 +4214,7 @@ offset_right = 200.0
 offset_bottom = 39.0
 theme_override_colors/font_color = Color(0.9194114, 0.5661991, 0.22032699, 1)
 
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/DialogBox" unique_id=1347802121]
+[node name="Text" type="RichTextLabel" parent="DialogBox/DialogBox" unique_id=1347802121]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 40.0
@@ -4264,10 +4264,11 @@ texture_progress = ExtResource("21_ryguw")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -170.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 80.0
+offset_left = -252.0
+offset_top = 5.0
+offset_right = -92.0
+offset_bottom = 75.0
+grow_horizontal = 0
 texture_normal = ExtResource("23_missplaca")
 ignore_texture_size = true
 stretch_mode = 0
@@ -4275,41 +4276,50 @@ stretch_mode = 0
 [node name="MissaoCaixa" type="Control" parent="HUD" unique_id=-1393967294]
 visible = false
 layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -420.0
-offset_top = 90.0
-offset_right = -10.0
-offset_bottom = 380.0
-grow_horizontal = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = -145.0
+offset_right = 205.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="BoxBG" type="TextureRect" parent="HUD/MissaoCaixa" unique_id=-1393967293]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -78.56
-offset_right = 78.44
+offset_left = 255.0
+offset_top = -163.0
+offset_right = 412.0
+offset_bottom = -163.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.9, 0.9)
 texture = ExtResource("22_missbox")
 
 [node name="MissaoImagem" type="TextureRect" parent="HUD/MissaoCaixa" unique_id=-1393967292]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 120.0
-offset_bottom = 120.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.37300003
+anchor_top = 0.224
+anchor_right = -0.37300003
+anchor_bottom = 0.224
+offset_left = 417.93
+offset_top = -217.95999
+offset_right = 527.93
+offset_bottom = -107.96
 stretch_mode = 1
 
 [node name="MissaoTexto" type="RichTextLabel" parent="HUD/MissaoCaixa" unique_id=-1393967291]
 layout_mode = 0
-offset_left = 38.0
-offset_top = 101.0
-offset_right = 321.0
-offset_bottom = 175.0
+offset_left = 413.0
+offset_top = -35.0
+offset_right = 696.0
+offset_bottom = 39.0
 pivot_offset = Vector2(500, 0)
 tooltip_text = "Missão"
 theme_override_colors/default_color = Color(0.9194114, 0.5661991, 0.22032699, 1)
@@ -4317,10 +4327,12 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9607843)
 text = "Derrote todos os lobos!"
 
 [node name="ConfigBtn" type="TextureButton" parent="HUD" unique_id=1483625549]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 70.0
-offset_bottom = 70.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_bottom = 60.0
+grow_horizontal = 0
 texture_normal = ExtResource("24_cfgbtn")
 ignore_texture_size = true
 stretch_mode = 0
@@ -4328,7 +4340,17 @@ stretch_mode = 0
 [node name="SettingsPanel" type="Control" parent="HUD" unique_id=364174890]
 visible = false
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("25_settingsgd")
 
 [connection signal="pressed" from="HUD/MissaoBtn" to="HUD" method="_on_missao_btn_pressed"]

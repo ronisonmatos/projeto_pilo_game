@@ -1,41 +1,23 @@
 [gd_scene format=3 uid="uid://u4tym4b301gd"]
 
-[ext_resource type="Script" uid="uid://ckh8nvsd753x7" path="res://src/entities/enemies/wolf/wolf.gd" id="1_eacbx"]
+[ext_resource type="Script" uid="uid://bxntmy3s8sxw8" path="res://src/entities/enemies/wolf/wolf.gd" id="1_eacbx"]
 [ext_resource type="PackedScene" uid="uid://dbv4in0jmto2f" path="res://floating_number.tscn" id="2_eacbx"]
+[ext_resource type="Texture2D" uid="uid://vcmhokx7kq3" path="res://npc/wolf/wolf_attack_left3.png" id="3_3ixpx"]
 [ext_resource type="Texture2D" uid="uid://8p1ie6p2wpc0" path="res://npc/wolf/wolf_down1.png" id="3_eacbx"]
-[ext_resource type="Texture2D" uid="uid://cbdbonlk5nr6m" path="res://npc/wolf/wolf_attack_left.png" id="3_qgbc0"]
 [ext_resource type="Texture2D" uid="uid://cj3tqme7iang2" path="res://npc/wolf/wolf_dead1.png" id="3_y6thd"]
-[ext_resource type="Texture2D" uid="uid://cenh03sswv2dt" path="res://npc/wolf/wolf_attack_right.png" id="4_bmbh8"]
+[ext_resource type="Texture2D" uid="uid://k3vo6l71co72" path="res://npc/wolf/wolf_attack_left2.png" id="4_2a4qd"]
+[ext_resource type="Texture2D" uid="uid://d0a0pa8hve2ag" path="res://npc/wolf/wolf_attack_left1.png" id="5_flmod"]
 [ext_resource type="Texture2D" uid="uid://br8qs531spmto" path="res://npc/wolf/wolf_dead2.png" id="6_3ixpx"]
+[ext_resource type="Texture2D" uid="uid://2pl3p4atgyw0" path="res://npc/wolf/wolf_attack_right3.png" id="6_nbl4e"]
 [ext_resource type="Texture2D" uid="uid://dq2twciul1lgg" path="res://npc/wolf/wolf_dead3.png" id="7_2a4qd"]
+[ext_resource type="Texture2D" uid="uid://dcql3fn3b1dam" path="res://npc/wolf/wolf_attack_right2.png" id="7_boe8m"]
+[ext_resource type="Texture2D" uid="uid://oag7lik203cn" path="res://npc/wolf/wolf_attack_right1.png" id="8_a1kux"]
 [ext_resource type="Texture2D" uid="uid://4gvklakajoxp" path="res://npc/wolf/wolf_left.png" id="10_flmod"]
 [ext_resource type="Texture2D" uid="uid://dmo60eilw55rs" path="res://npc/wolf/wolf_right.png" id="11_nbl4e"]
-[ext_resource type="Texture2D" uid="uid://d4ffhtxp0xx57" path="res://npc/wolf/wolf_up1.png" id="12_boe8m"]
-[ext_resource type="Texture2D" uid="uid://qwcnu84s7m5i" path="res://npc/wolf/wolf_up2.png" id="13_a1kux"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k1jm4"]
-atlas = ExtResource("3_qgbc0")
-region = Rect2(0, 0, 1201, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tna5i"]
-atlas = ExtResource("3_qgbc0")
-region = Rect2(1201, 0, 1201, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_270kw"]
-atlas = ExtResource("3_qgbc0")
-region = Rect2(2402, 0, 1201, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fqk4c"]
-atlas = ExtResource("4_bmbh8")
-region = Rect2(0, 0, 1201, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6oij7"]
-atlas = ExtResource("4_bmbh8")
-region = Rect2(1201, 0, 1201, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ok2o"]
-atlas = ExtResource("4_bmbh8")
-region = Rect2(2402, 0, 1201, 517)
+[ext_resource type="Texture2D" uid="uid://d2oiyuc4knanb" path="res://npc/wolf/wolf_up_1.png" id="15_nbl4e"]
+[ext_resource type="Texture2D" uid="uid://c6fmjimu2uyt5" path="res://npc/wolf/wolf_up_2.png" id="16_boe8m"]
+[ext_resource type="Texture2D" uid="uid://c2iypu44t2udq" path="res://npc/wolf/wolf_up_3.png" id="17_a1kux"]
+[ext_resource type="Texture2D" uid="uid://l6nmh0fhuk4f" path="res://npc/wolf/wolf_up_4.png" id="18_k1jm4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ulwsi"]
 atlas = ExtResource("3_eacbx")
@@ -85,65 +67,33 @@ region = Rect2(1988, 0, 994, 517)
 atlas = ExtResource("11_nbl4e")
 region = Rect2(2982, 0, 994, 517)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g2075"]
-atlas = ExtResource("12_boe8m")
-region = Rect2(0, 0, 383, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iohxh"]
-atlas = ExtResource("12_boe8m")
-region = Rect2(383, 0, 383, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t3ymk"]
-atlas = ExtResource("12_boe8m")
-region = Rect2(766, 0, 383, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jx6sr"]
-atlas = ExtResource("12_boe8m")
-region = Rect2(1149, 0, 383, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vc2we"]
-atlas = ExtResource("13_a1kux")
-region = Rect2(0, 0, 383, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d5pav"]
-atlas = ExtResource("13_a1kux")
-region = Rect2(383, 0, 383, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x34te"]
-atlas = ExtResource("13_a1kux")
-region = Rect2(766, 0, 383, 517)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_umkpr"]
-atlas = ExtResource("13_a1kux")
-region = Rect2(1149, 0, 383, 517)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_bmbh8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k1jm4")
+"texture": ExtResource("3_3ixpx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tna5i")
+"texture": ExtResource("4_2a4qd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_270kw")
+"texture": ExtResource("5_flmod")
 }],
-"loop": false,
+"loop": true,
 "name": &"wolf_attack_left",
 "speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fqk4c")
+"texture": ExtResource("6_nbl4e")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6oij7")
+"texture": ExtResource("7_boe8m")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4ok2o")
+"texture": ExtResource("8_a1kux")
 }],
-"loop": false,
+"loop": true,
 "name": &"wolf_attack_right",
 "speed": 10.0
 }, {
@@ -153,6 +103,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("6_3ixpx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2a4qd")
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_2a4qd")
@@ -174,7 +127,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3ixpx")
 }],
-"loop": false,
+"loop": true,
 "name": &"wolf_down",
 "speed": 5.0
 }, {
@@ -191,7 +144,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t1hei")
 }],
-"loop": false,
+"loop": true,
 "name": &"wolf_left",
 "speed": 5.0
 }, {
@@ -208,36 +161,24 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qkk7k")
 }],
-"loop": false,
+"loop": true,
 "name": &"wolf_right",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g2075")
+"texture": ExtResource("15_nbl4e")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iohxh")
+"texture": ExtResource("16_boe8m")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t3ymk")
+"texture": ExtResource("17_a1kux")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jx6sr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vc2we")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d5pav")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x34te")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_umkpr")
+"texture": ExtResource("18_k1jm4")
 }],
-"loop": false,
+"loop": true,
 "name": &"wolf_up",
 "speed": 5.0
 }]
@@ -257,21 +198,21 @@ floating_number_scene = ExtResource("2_eacbx")
 position = Vector2(-3.9999962, 2.999999)
 scale = Vector2(0.11428052, 0.11428054)
 sprite_frames = SubResource("SpriteFrames_bmbh8")
-animation = &"wolf_down"
+animation = &"wolf_attack_right"
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=2142558002]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1872698864]
 shape = SubResource("CircleShape2D_vchbq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=964732037]
-position = Vector2(-5.5, 0.5)
-shape = SubResource("RectangleShape2D_ryguw")
-
 [node name="NavigationAgent" type="NavigationAgent2D" parent="." unique_id=1124396319]
 path_desired_distance = 8.0
 target_desired_distance = 32.0
 path_max_distance = 60.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=964732037]
+position = Vector2(-5.5, 0.5)
+shape = SubResource("RectangleShape2D_ryguw")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

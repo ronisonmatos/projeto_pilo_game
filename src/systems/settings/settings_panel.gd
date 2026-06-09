@@ -59,11 +59,11 @@ func _build_ui() -> void:
 
 	# --- Painel central ---
 	var panel := Control.new()
-	panel.set_anchors_preset(Control.PRESET_CENTER)
-	panel.offset_left   = -PANEL_SIZE.x * 0.5
-	panel.offset_top    = -PANEL_SIZE.y * 0.5
-	panel.offset_right  =  PANEL_SIZE.x * 0.5
-	panel.offset_bottom =  PANEL_SIZE.y * 0.5
+
+	panel.size = PANEL_SIZE
+		
+	var viewport_size = get_viewport_rect().size
+	panel.position = (viewport_size - PANEL_SIZE) / 2.0
 	add_child(panel)
 
 	# Imagem de fundo
@@ -91,7 +91,7 @@ func _build_ui() -> void:
 	title.text = "Configurações"
 	title.add_theme_font_size_override("font_size", 20)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_color_override("font_color", Color(0.95, 0.85, 0.55))
+	title.add_theme_color_override("font_color", Color(0.107, 0.082, 0.012, 1.0))
 	vbox.add_child(title)
 
 	vbox.add_child(HSeparator.new())
@@ -109,7 +109,7 @@ func _create_slider_row(parent: Control, label_text: String, key: String) -> voi
 	lbl.text                  = label_text
 	lbl.custom_minimum_size   = Vector2(150, 0)
 	lbl.vertical_alignment    = VERTICAL_ALIGNMENT_CENTER
-	lbl.add_theme_color_override("font_color", Color(0.9, 0.85, 0.75))
+	lbl.add_theme_color_override("font_color", Color(0.267, 0.225, 0.14, 1.0))
 	row.add_child(lbl)
 
 	var slider := HSlider.new()
@@ -125,7 +125,7 @@ func _create_slider_row(parent: Control, label_text: String, key: String) -> voi
 	var pct := Label.new()
 	pct.custom_minimum_size  = Vector2(48, 0)
 	pct.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	pct.add_theme_color_override("font_color", Color(0.9, 0.85, 0.75))
+	pct.add_theme_color_override("font_color", Color(0.267, 0.225, 0.14, 1.0))
 	pct.text = "100%"
 	row.add_child(pct)
 
