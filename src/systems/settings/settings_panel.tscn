@@ -1,0 +1,17 @@
+[gd_scene format=4 uid="uid://bsp4n3ls1sc3n"]
+
+[ext_resource type="Script" uid="uid://drcwnkhm43buv" path="res://src/systems/settings/settings_panel.gd" id="1_script"]
+
+[node name="SettingsPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+script = ExtResource("1_script")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0

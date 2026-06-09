@@ -43,6 +43,7 @@ var _last_direction:   String = "down"
 # Ciclo de vida
 # ---------------------------------------------------------------------------
 func _ready() -> void:
+	super._ready()
 	_origin = global_position
 	add_to_group("enemy")
 	_setup_health_component()
@@ -169,6 +170,17 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 # ---------------------------------------------------------------------------
 func take_damage(amount: int) -> void:
 	_health_component.take_damage(amount)
+
+# ---------------------------------------------------------------------------
+# Morte do player — para de perseguir/atacar
+# ---------------------------------------------------------------------------
+func _on_player_died() -> void:
+	if _state == State.DEAD:
+		return
+	_player = null
+	_state  = State.PATROL
+	velocity = Vector2.ZERO
+	_pick_patrol_target()
 
 # ---------------------------------------------------------------------------
 # Morte

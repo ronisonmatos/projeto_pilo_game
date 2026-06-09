@@ -33,6 +33,7 @@ var _health_component: HealthComponent
 var _faith_component:  FaithComponent
 var _last_direction:   String = "down"
 var _is_attacking:     bool   = false
+var _is_dead:          bool   = false
 
 # ---------------------------------------------------------------------------
 # Ciclo de vida
@@ -64,6 +65,8 @@ func _setup_faith_component() -> void:
 # Loop de física
 # ---------------------------------------------------------------------------
 func _physics_process(_delta: float) -> void:
+	if _is_dead:
+		return
 	if Input.is_action_just_pressed("attack"):
 		_start_attack()
 	if _is_attacking:
@@ -159,5 +162,22 @@ func _on_faith_changed(new_val: int, max_val: int) -> void:
 	EventBus.player_faith_changed.emit(new_val, max_val)
 
 func _on_died() -> void:
+	_is_dead       = true
+	_is_attacking  = false
+	velocity       = Vector2.ZERO
+	_hitbox.monitoring = false
+	_anim.play("player_dead")
 	player_died.emit()
 	EventBus.player_died.emit()
+	await get_tree().create_timer(3.0).timeout
+	_respawn()
+
+func _respawn() -> void:
+	var spawn := get_tree().get_first_node_in_group("spawn_point")
+	if spawn:
+		global_position = spawn.global_position
+	_health_component.reset()
+	_is_dead       = false
+	_last_direction = "down"
+	_play_idle_animation()
+	EventBus.player_health_changed.emit(max_health, max_health)

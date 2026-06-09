@@ -32,3 +32,8 @@ func get_health() -> int:
 
 func is_alive() -> bool:
 	return not _dead
+
+func reset() -> void:
+	_dead   = false
+	_health = max_health
+	health_changed.emit(_health, max_health)

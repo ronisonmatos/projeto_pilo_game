@@ -3,8 +3,7 @@ extends Control
 # ---------------------------------------------------------------------------
 # Constantes
 # ---------------------------------------------------------------------------
-const SAVE_PATH  := "user://settings.tres"
-const PANEL_SIZE := Vector2(480, 360)
+const SAVE_PATH := "user://settings.tres"
 
 # ---------------------------------------------------------------------------
 # Estado interno
@@ -28,7 +27,6 @@ func toggle() -> void:
 	if visible:
 		_sync_sliders_from_audio()
 
-## Chamado pelo sistema de login quando o usuário faz login.
 ## Aplica as configurações salvas no perfil do jogador.
 func load_user_settings(settings: UserSettings) -> void:
 	if not settings:
@@ -51,27 +49,17 @@ func get_current_settings() -> UserSettings:
 
 # ---------------------------------------------------------------------------
 # Construção da UI em código
+# (o nó já está centrado via anchors no main.tscn — sem tocar em posição aqui)
 # ---------------------------------------------------------------------------
 func _build_ui() -> void:
-	# Overlay full-screen — consome cliques fora do painel
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	set_anchors_preset(Control.PRESET_FULL_RECT)
-
-	# --- Painel central ---
-	var panel := Control.new()
-
-	panel.size = PANEL_SIZE
-		
-	var viewport_size = get_viewport_rect().size
-	panel.position = (viewport_size - PANEL_SIZE) / 2.0
-	add_child(panel)
 
 	# Imagem de fundo
 	var bg := TextureRect.new()
 	bg.texture      = load("res://ui/bg_config.png")
 	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-	panel.add_child(bg)
+	add_child(bg)
 
 	# Container de conteúdo sobre o fundo
 	var margin := MarginContainer.new()
@@ -80,7 +68,7 @@ func _build_ui() -> void:
 	margin.add_theme_constant_override("margin_left",   50)
 	margin.add_theme_constant_override("margin_right",  50)
 	margin.add_theme_constant_override("margin_bottom", 40)
-	panel.add_child(margin)
+	add_child(margin)
 
 	var vbox := VBoxContainer.new()
 	vbox.add_theme_constant_override("separation", 22)
@@ -121,7 +109,6 @@ func _create_slider_row(parent: Control, label_text: String, key: String) -> voi
 	slider.value_changed.connect(func(v: float): _on_slider_changed(key, v))
 	row.add_child(slider)
 
-	# Label de percentual à direita
 	var pct := Label.new()
 	pct.custom_minimum_size  = Vector2(48, 0)
 	pct.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -144,7 +131,6 @@ func _initialize_volumes() -> void:
 	else:
 		_sync_sliders_from_audio()
 
-# Lê os valores atuais do AudioServer e atualiza os sliders (sem salvar)
 func _sync_sliders_from_audio() -> void:
 	_applying = true
 	_apply_to_sliders(
@@ -173,7 +159,6 @@ func _on_slider_changed(key: String, value: float) -> void:
 		_save_to_disk()
 
 func _set_bus_volume(key: String, value: float) -> void:
-	# Abaixo de 0.1% usa -80 dB (silêncio) para evitar -inf
 	var db := -80.0 if value <= 0.001 else linear_to_db(value)
 	match key:
 		"master":

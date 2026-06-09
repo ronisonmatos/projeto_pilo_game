@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c1pbytiaekwq6"]
 
-[ext_resource type="Script" uid="uid://dvskinqptir4p" path="res://src/entities/player/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://ddinppin4ktct" path="res://src/entities/player/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://dwacudv8jg0uy" path="res://player/idle_down.png" id="2_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://dcpvu7fawd0u6" path="res://player/player_attack_left1.png" id="2_iruf7"]
 [ext_resource type="Texture2D" uid="uid://baegs45jcicm0" path="res://player/player_attack1.png" id="2_pylmc"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://go7rh8wl8nwu" path="res://player/player_attack10.png" id="11_2wuci"]
 [ext_resource type="Texture2D" uid="uid://dff2ycomfedhk" path="res://player/player_attack_left10.png" id="11_b88wv"]
 [ext_resource type="AudioStream" uid="uid://520dgf8mm2my" path="res://sfx/attack.mp3" id="30_j5n4i"]
+[ext_resource type="Texture2D" uid="uid://1w24y015sp7r" path="res://player/player_dead.png" id="31_dead"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pbfsw"]
 atlas = ExtResource("6_b26j0")
@@ -283,6 +284,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("31_dead")
+}],
+"loop": false,
+"name": &"player_dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_pbfsw")
 }, {
 "duration": 1.0,
@@ -361,10 +370,10 @@ script = ExtResource("1_4flbx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=889490091]
 texture_filter = 1
-position = Vector2(4, 1)
+position = Vector2(5, 32.000004)
 scale = Vector2(0.18, 0.18)
 sprite_frames = SubResource("SpriteFrames_sweqy")
-animation = &"attack_up"
+animation = &"player_dead"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1870184720]
 position = Vector2(5, 42.5)

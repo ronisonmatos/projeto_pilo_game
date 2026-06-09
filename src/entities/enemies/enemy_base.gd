@@ -4,6 +4,14 @@ extends CharacterBody2D
 # Cena dos números flutuantes de dano — atribuída no inspetor de cada inimigo
 @export var floating_number_scene: PackedScene
 
+func _ready() -> void:
+	EventBus.player_died.connect(_on_player_died)
+
+# Chamado automaticamente quando o player morre.
+# Sobrescrever em cada inimigo concreto para parar o ataque.
+func _on_player_died() -> void:
+	pass
+
 # Sobrescrito por cada inimigo concreto
 func take_damage(amount: int) -> void:
 	pass
