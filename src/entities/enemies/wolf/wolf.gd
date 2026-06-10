@@ -24,9 +24,11 @@ enum State { PATROL, CHASE, ATTACK, DEAD }
 # ---------------------------------------------------------------------------
 # Nós filhos
 # ---------------------------------------------------------------------------
-@onready var _anim:           AnimatedSprite2D  = $AnimatedSprite2D
-@onready var _agent:          NavigationAgent2D = $NavigationAgent
-@onready var _detection_area: Area2D            = $DetectionArea
+@onready var _anim:           AnimatedSprite2D    = $AnimatedSprite2D
+@onready var _agent:          NavigationAgent2D   = $NavigationAgent
+@onready var _detection_area: Area2D              = $DetectionArea
+@onready var _growl_sound:    AudioStreamPlayer2D = $GrowlSound
+@onready var _attack_sound:   AudioStreamPlayer2D = $AttackSound
 
 # ---------------------------------------------------------------------------
 # Estado interno
@@ -47,6 +49,8 @@ func _ready() -> void:
 	_origin = global_position
 	add_to_group("enemy")
 	_setup_health_component()
+	_growl_sound.stream  = load("res://sfx/wolf-growl.wav")
+	_attack_sound.stream = load("res://sfx/wolf_attck.mp3")
 	# Aguarda um frame para o NavigationAgent estar pronto
 	await get_tree().process_frame
 	_pick_patrol_target()
@@ -116,6 +120,7 @@ func _tick_attack(delta: float) -> void:
 	if _attack_timer <= 0.0:
 		_attack_timer = attack_cooldown
 		_play_attack_anim(_player.global_position - global_position)
+		_attack_sound.play()
 		if _player.has_method("take_damage"):
 			_player.take_damage(attack_damage)
 
@@ -158,6 +163,7 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 		_player = body
 		_state  = State.CHASE
 		_agent.target_position = _player.global_position
+		_growl_sound.play()
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body == _player:

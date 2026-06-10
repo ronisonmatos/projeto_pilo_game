@@ -370,7 +370,7 @@ script = ExtResource("1_4flbx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=889490091]
 texture_filter = 1
-position = Vector2(5, 32.000004)
+position = Vector2(4.9999995, 4.000001)
 scale = Vector2(0.18, 0.18)
 sprite_frames = SubResource("SpriteFrames_sweqy")
 animation = &"player_dead"

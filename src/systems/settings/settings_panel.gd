@@ -33,7 +33,7 @@ func load_user_settings(settings: UserSettings) -> void:
 		return
 	_applying = true
 	_apply_to_audio(settings)
-	_apply_to_sliders(settings.master_volume, settings.music_volume, settings.sfx_volume)
+	_apply_to_sliders(settings.master_volume, settings.music_volume, settings.bgm_volume, settings.sfx_volume)
 	_applying = false
 
 ## Retorna as configurações atuais para salvar no perfil do usuário logado.
@@ -43,6 +43,8 @@ func get_current_settings() -> UserSettings:
 		s.master_volume = _sliders["master"]["slider"].value
 	if _sliders.has("music"):
 		s.music_volume  = _sliders["music"]["slider"].value
+	if _sliders.has("bgm"):
+		s.bgm_volume    = _sliders["bgm"]["slider"].value
 	if _sliders.has("sfx"):
 		s.sfx_volume    = _sliders["sfx"]["slider"].value
 	return s
@@ -86,6 +88,7 @@ func _build_ui() -> void:
 
 	_create_slider_row(vbox, "Volume Geral",    "master")
 	_create_slider_row(vbox, "Música",          "music")
+	_create_slider_row(vbox, "Música de Fundo", "bgm")
 	_create_slider_row(vbox, "Efeitos Sonoros", "sfx")
 
 func _create_slider_row(parent: Control, label_text: String, key: String) -> void:
@@ -126,7 +129,7 @@ func _initialize_volumes() -> void:
 	if saved:
 		_applying = true
 		_apply_to_audio(saved)
-		_apply_to_sliders(saved.master_volume, saved.music_volume, saved.sfx_volume)
+		_apply_to_sliders(saved.master_volume, saved.music_volume, saved.bgm_volume, saved.sfx_volume)
 		_applying = false
 	else:
 		_sync_sliders_from_audio()
@@ -136,13 +139,15 @@ func _sync_sliders_from_audio() -> void:
 	_apply_to_sliders(
 		_db_to_slider(AudioServer.get_bus_volume_db(0)),
 		_get_bus_slider("Music"),
+		_get_bus_slider("Background_Sound_Map_1"),
 		_get_bus_slider("SFX")
 	)
 	_applying = false
 
-func _apply_to_sliders(master: float, music: float, sfx: float) -> void:
+func _apply_to_sliders(master: float, music: float, bgm: float, sfx: float) -> void:
 	_set_slider("master", master)
 	_set_slider("music",  music)
+	_set_slider("bgm",    bgm)
 	_set_slider("sfx",    sfx)
 
 func _set_slider(key: String, value: float) -> void:
@@ -167,6 +172,10 @@ func _set_bus_volume(key: String, value: float) -> void:
 			var idx := AudioServer.get_bus_index("Music")
 			if idx >= 0:
 				AudioServer.set_bus_volume_db(idx, db)
+		"bgm":
+			var idx := AudioServer.get_bus_index("Background_Sound_Map_1")
+			if idx >= 0:
+				AudioServer.set_bus_volume_db(idx, db)
 		"sfx":
 			var idx := AudioServer.get_bus_index("SFX")
 			if idx >= 0:
@@ -175,6 +184,7 @@ func _set_bus_volume(key: String, value: float) -> void:
 func _apply_to_audio(settings: UserSettings) -> void:
 	_set_bus_volume("master", settings.master_volume)
 	_set_bus_volume("music",  settings.music_volume)
+	_set_bus_volume("bgm",    settings.bgm_volume)
 	_set_bus_volume("sfx",    settings.sfx_volume)
 
 func _get_bus_slider(bus_name: String) -> float:
@@ -191,6 +201,7 @@ func _save_to_disk() -> void:
 	var settings := UserSettings.new()
 	settings.master_volume = _sliders["master"]["slider"].value
 	settings.music_volume  = _sliders["music"]["slider"].value
+	settings.bgm_volume    = _sliders["bgm"]["slider"].value
 	settings.sfx_volume    = _sliders["sfx"]["slider"].value
 	ResourceSaver.save(settings, SAVE_PATH)
 

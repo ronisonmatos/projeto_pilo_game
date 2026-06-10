@@ -214,5 +214,9 @@ path_max_distance = 60.0
 position = Vector2(-5.5, 0.5)
 shape = SubResource("RectangleShape2D_ryguw")
 
+[node name="GrowlSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
